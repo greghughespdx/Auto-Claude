@@ -764,6 +764,9 @@ export function registerMemoryHandlers(): void {
 
         const [pythonExe, baseArgs] = parsePythonCommand(pythonCmd);
         const args = [...baseArgs, scriptPath, 'pull-model', modelName];
+        if (baseUrl) {
+          args.push('--base-url', baseUrl);
+        }
 
         return new Promise((resolve) => {
           const proc = spawn(pythonExe, args, {

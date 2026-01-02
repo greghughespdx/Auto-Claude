@@ -193,6 +193,22 @@ export function MemoryStep({ onNext, onBack }: MemoryStepProps) {
       return (
         <div className="space-y-4">
           <div className="space-y-2">
+            <Label htmlFor="ollama-url" className="text-sm font-medium text-foreground">
+              Ollama Server URL
+            </Label>
+            <Input
+              id="ollama-url"
+              type="text"
+              value={config.ollamaBaseUrl}
+              onChange={(e) => setConfig(prev => ({ ...prev, ollamaBaseUrl: e.target.value }))}
+              className="font-mono text-sm"
+              disabled={isSaving}
+            />
+            <p className="text-xs text-muted-foreground">
+              Default is localhost. Change this if Ollama runs on a different machine.
+            </p>
+          </div>
+          <div className="space-y-2">
             <Label className="text-sm font-medium text-foreground">
               Select Embedding Model
             </Label>
@@ -200,6 +216,7 @@ export function MemoryStep({ onNext, onBack }: MemoryStepProps) {
               selectedModel={config.ollamaEmbeddingModel}
               onModelSelect={handleOllamaModelSelect}
               disabled={isSaving}
+              baseUrl={config.ollamaBaseUrl}
             />
           </div>
         </div>
